@@ -21,6 +21,10 @@ Wanting to explore a unique way to share CSV/Excel data through the
 which we were all communicating on. Discord. So we decided to create `DisGraph`
 , a Discord bot that can read in your data from a `.csv` and return a graph.
 
+How will Joon take the bot further? First, fix as much of the known problems as possible. 
+Disgraph was never perfect, and never was going to be perfect since half of it was designed by 4 
+high school students with a lot of caffeine in their systems at 4am. Second, expand the functionality 
+beyond .csv file recognition. Third, honestly I haven't thought this far, but we'll see how things go :)
 <p align="center">
 <img src="img/example.png" alt="Example image with Geo Spatial Graph">
 </p>
