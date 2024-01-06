@@ -1,3 +1,4 @@
+import bot
 from settings import *
 from graph import *
 
@@ -18,7 +19,7 @@ async def wait_for_message(ctx):
         msg = await bot.wait_for('message', timeout=30)
     except asyncio.TimeoutError:
         await ctx.send('Timed out. Please try again.')
-        return
+        return discord.Message()
     else:
         return msg
 
