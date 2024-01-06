@@ -1,4 +1,3 @@
-import asyncio
 from settings import *
 from graph import *
 
@@ -16,9 +15,9 @@ def convert_to_csv(file):
 
 async def wait_for_message(ctx):
     try:
-        msg = await bot.wait_for('message', timeout=60)
+        msg = await bot.wait_for('message', timeout=30)
     except asyncio.TimeoutError:
-        await ctx.send('Timed out. Pleas try again.')
+        await ctx.send('Timed out. Please try again.')
         return
     else:
         return msg
@@ -36,7 +35,7 @@ async def check_graph_type(ctx, msg, rc_len):
         return msg
 
 
-def initial_analysis(ctx, file_path):
+async def initial_analysis(ctx, file_path):
     with open(file_path, 'r') as data:
         # check number of rows and columns
         # throw problems if number of rows/columns is too large (greater than 3)
