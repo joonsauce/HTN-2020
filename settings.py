@@ -10,11 +10,6 @@ import csv
 import matplotlib.pyplot as plt
 import itertools
 
-
-# geoplotlib doesn't seem to work for whatever reason - fix this, but probably not necessary
-# import geoplotlib
-# from geoplotlib.utils import read_csv
-
 prefix = "d!"
 description = "Joon's updated version of DisGraph, a HTN 2020++ project and submission by Team Joon."
 # csv and xlsx/xls should be enough and most common enough

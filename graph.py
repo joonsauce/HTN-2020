@@ -1,8 +1,4 @@
-import csv
-import matplotlib.pyplot as plt
-import geoplotlib
-from geoplotlib.utils import read_csv
-
+from settings import *
 
 variables = {
     'x': [],
@@ -107,27 +103,3 @@ def basic_pie(file):
     plt.title('Pie Chart')
     plt.savefig('temp/pie.png')
 
-
-def geo_dot(file):      # file must have at top: name,lat,lon
-    """
-    Renders a geo dot graph
-    :param file: path to file
-    :return: saves image to temp/map.png
-    """
-    data = read_csv(file)
-    geoplotlib.dot(data, point_size=3)
-    # geoplotlib.show()
-    geoplotlib.savefig('temp/map')
-
-
-def geo_spatial(file):
-    """
-    Renders a geo spatial graph
-    :param file: path to file
-    :return: saves image to temp/spatial.png
-    """
-    data = read_csv(file)
-    geoplotlib.graph(data, src_lat='lat_departure', src_lon='lon_departure', dest_lat='lat_arrival',
-                     dest_lon='lon_arrival', color='hot_r', alpha=16, linewidth=2)
-    # geoplotlib.show()
-    geoplotlib.savefig('temp/spatial')
