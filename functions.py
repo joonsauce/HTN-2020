@@ -1,6 +1,5 @@
-import bot
-from settings import *
 from graph import *
+from settings import *
 
 
 def convert_to_csv(file):
