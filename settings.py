@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import os
 import pandas
 import requests
+import uuid
 from discord.ext import commands
 
 prefix = "d!"
