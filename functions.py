@@ -15,10 +15,10 @@ def convert_to_csv(file):
 
 async def wait_for_message(ctx):
     try:
-        msg = await bot.wait_for('message', timeout=30)
+        msg = await bot.wait_for('message', timeout=60)
     except asyncio.TimeoutError:
         await ctx.send('Timed out. Please try again.')
-        return discord.Message()
+        return None
     else:
         return msg
 
