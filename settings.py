@@ -13,8 +13,8 @@ description = "Joon's updated version of DisGraph, a HTN 2020++ project and subm
 # csv and xlsx/xls should be enough and most common enough
 supported_file_types = [".csv", ".xlsx", ".xls"]
 
-# only default intents required
-intents = discord.Intents.default()
+# for debug only, find exactly what intents are required
+intents = discord.Intents.all()
 allowed_mentions = discord.AllowedMentions(everyone=False,
                                            users=True,
                                            roles=False)
@@ -22,6 +22,8 @@ allowed_mentions = discord.AllowedMentions(everyone=False,
 # bot instance
 bot = commands.Bot(command_prefix=prefix, intents=intents, description=description, case_insensitive=True,
                    allowed_mentions=allowed_mentions)
+
+bot.remove_command('help')
 
 with open('bot_token.txt', 'r') as token:
     bot_token = token.readline()
