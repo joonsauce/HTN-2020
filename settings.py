@@ -25,4 +25,3 @@ bot = commands.Bot(command_prefix=prefix, intents=intents, description=descripti
 
 with open('bot_token.txt', 'r') as token:
     bot_token = token.readline()
-    print(bot_token)
