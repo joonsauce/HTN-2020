@@ -23,3 +23,6 @@ allowed_mentions = discord.AllowedMentions(everyone=False,
 bot = commands.Bot(command_prefix=prefix, intents=intents, description=description, case_insensitive=True,
                    allowed_mentions=allowed_mentions)
 
+with open('bot_token.txt', 'r') as token:
+    bot_token = token.readline()
+    print(bot_token)

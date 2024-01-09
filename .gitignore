@@ -295,3 +295,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,vscode,windows,macos,python
+/bot_token.txt
