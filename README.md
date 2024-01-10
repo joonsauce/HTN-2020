@@ -61,24 +61,19 @@ if you'd like to host the bot yourself you can.
    - `GEOSPATIAL TABLE`
 
 # Usage
-There are a few options for graphs with one command. The CSV's must follow an
-exact format as seen in `example_data`
+DisGraph has a few commands available:
 
-The command is `d!graph {graph_type}`
+`d!graph_file`: Running the command will guide you through the process. 
+The bot will automatically analyze the given data and give you the appropriate
+graph types available for the dadta.
 
 ### Graph Types
-- yy-bar
-  - CSV must have columns `x`, `y1`, `y2`
-- yy-line
-  - CSV must have columns `x`, `y1`, `y2`
-- yy-scatter
-  - CSV must have columns `x`, `y1`, `y2`
-- y-pie
-  - CSV must have columns `name`, `count`
-- geodot
-  - CSV must have columns `name`, `lat`, `lon`
-- geospatial
-  - CSV must have columns `lon_departure`, `lat_departure`, `lon_arrival`, `lat_arrival`
+- 2-variable graphs (bar, line, scatter)
+  - Data file must have 2 columns and equal number of rows with **valid**
+data
+- n-variable graph (pie)
+  - Data file must have exactly 2 rows and n columns, where the first row 
+contains the name of the data below it
 
 # License
 
