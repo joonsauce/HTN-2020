@@ -9,11 +9,12 @@ X = []
 Y = []
 
 
-def basic_line(file):
+def basic_line(file, file_id):
     """
     Renders a basic line graph
     :param file: path to file
-    :return: saves image to temp/Line.png
+    :param file_id: id of file
+    :return: saves image to temp/{file_id}.png
     """
     lines_num = 2
     var = {}
@@ -37,14 +38,14 @@ def basic_line(file):
     plt.ylabel('y')
     plt.legend()
     # plt.show()
-    plt.savefig('temp/Line.png')
+    plt.savefig('temp/{}.png'.format(file_id))
 
 
-def basic_bar(file):
+def basic_bar(file, file_id):
     """
     Renders a basic bar graph
     :param file: path to file
-    :return: saves image to temp/bar.png
+    :return: saves image to temp/{file_id}.png
     """
     with open(file, 'r') as csvfile:
         plotting = csv.reader(csvfile, delimiter=',')
@@ -59,14 +60,14 @@ def basic_bar(file):
     plt.ylabel('y')
     plt.legend()
     # plt.show()
-    plt.savefig('temp/bar.png')
+    plt.savefig('temp/{}.png'.format(file_id))
 
 
-def basic_scatter(file):
+def basic_scatter(file, file_id):
     """
     Renders a basic scatter graph
     :param file: path to file
-    :return: saves image to temp/scatter.png
+    :return: saves image to temp/{file_id}.png
     """
     with open(file, 'r') as csvfile:
         plotting = csv.reader(csvfile, delimiter=',')
@@ -80,14 +81,15 @@ def basic_scatter(file):
     plt.ylabel('y')
     plt.legend()
     # plt.show()
-    plt.savefig('temp/scatter.png')
+    plt.savefig('temp/{}.png'.format(file_id))
 
 
-def basic_pie(file):
+def basic_pie(file, file_id):
     """
     Renders a basic pie graph
     :param file: path to file
-    :return: saves image to temp/pie.png
+    :param file_id: id of file
+    :return: saves image to temp/{file_id}.png
     """
     names = []
     values = []
@@ -101,5 +103,5 @@ def basic_pie(file):
 
     plt.pie(values, labels=names, colors=colors, startangle=90)
     plt.title('Pie Chart')
-    plt.savefig('temp/pie.png')
+    plt.savefig('temp/{}.png'.format(file_id))
 
