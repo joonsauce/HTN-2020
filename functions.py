@@ -74,7 +74,7 @@ async def initial_analysis(ctx, file_path, file_id):
                 if x == 1:
                     two_var_line(file_path, file_id)
                 elif x == 2:
-                    basic_scatter(file_path, file_id)
+                    two_var_scatter(file_path, file_id)
                 elif x == 3:
                     two_var_bar(file_path, file_id)
                 else:
