@@ -23,58 +23,61 @@ async def wait_for_message(ctx):
         return msg
 
 
-async def check_graph_type(ctx, msg, rc_len):
-    if not msg.isnumeric():
-        await ctx.send("Graph type must be inputted as an integer. Please try again.")
-        return
-    else:
+async def check_graph_type(ctx, max_val):
+    msg = await wait_for_message(ctx)
+    if msg:
+        msg = msg.content
+        if not msg.isnumeric():
+            await ctx.send("Graph type must be inputted as an integer. Please try again.")
+            return -1
         if not float(msg).is_integer():
             await ctx.send("Graph type must be inputted as an integer. Please try again.")
-            return
+            return -1
         msg = int(msg)
+        if msg <= 0 or msg > max_val:
+            await ctx.send("Invalid graph type")
+            return -1
         return msg
+    return -1
 
 
-async def initial_analysis(ctx, file_path):
+def verify_data(data: list, row_len: int, col_len: int) -> bool:
+    return all([len(data[i]) == col_len for i in range(row_len)])
+
+
+async def initial_analysis(ctx, file_path, file_id):
     with open(file_path, 'r') as data:
         # check number of rows and columns
         # throw problems if number of rows/columns is too large (greater than 3)
         # return number of rows/columns and save direction
-        reader = csv.reader(data)
-        row_len = len(list(reader))
-        row_type = False
-        if row_len > 3:
-            reader1, reader2 = itertools.tee(data)
-            col_len = len(next(reader1))
-            del reader1
-            if col_len == 2:
-                await ctx.send("Please choose a graph type from the following: X vs Y (line, 1), X vs Y (scatter, 2), "
-                               "X vs Y (bar, 3), Pie (4)")
-            # 3 var graphs will be implemented later
-            # elif col_len == 3:
-            #     await ctx.send("Please choose a graph type from the following: X vs Y1 and Y2 (line, 1), "
-            #                    "X vs Y1 and Y2 (bar,2 )")
-            else:
-                await ctx.send("File format is invalid. Please run `d!help` to find out more about the file format.")
-                return
-            row_type = False
-        # 3 var graphs will be implemented later
-        # elif row_len == 3:
-        #     await ctx.send("Please choose a graph type from the following: X vs Y1 and Y2 (line, 1), "
-        #                    "X vs Y1 and Y2 (bar,2 )")
-        #     row_type = True
-        elif row_len == 2:
-            await ctx.send("Please choose a graph type from the following: X vs Y (line, 1), X vs Y (scatter, 2), "
-                           "X vs Y (bar, 3), Pie(4)")
-            row_type = True
-        msg = await wait_for_message(ctx)
-        if msg:
-            if row_type:
-                await check_graph_type(ctx, msg, row_len)
-            else:
-                await check_graph_type(ctx, msg, col_len)
-            # should create graph here - make new function
-        else:
-            await ctx.send("Timed out. Please try again.")
+        data = list(csv.reader(data))
+        row_len = len(data)
+        if row_len <= 1:
+            await ctx.send("Data invalid. Please run `d!help` for more information "
+                           "on formatting your data for graphing")
             return
+        col_len = len(data[0])
+        if not verify_data(data, row_len, col_len):
+            await ctx.send("Data invalid. Please run `d!help` for more information "
+                           "on formatting your data for graphing")
+            return
+        if row_len == 2:
+            await ctx.send("Please choose a graph type: Pie (1)")
+            x = await check_graph_type(ctx, 1)
+            if x == 1:
+                basic_pie(file_path, file_id)
+        else:
+            if col_len == 2:
+                await ctx.send("Please choose a graph type: X vs Y *line* (1), X vs Y *scatter* (2), "
+                               "X vs Y *bar* (3)")
+                x = await check_graph_type(ctx, 3)
+                if x == 1:
+                    basic_line(file_path, file_id)
+                elif x == 2:
+                    basic_scatter(file_path, file_id)
+                elif x == 3:
+                    basic_bar(file_path, file_id)
+                else:
+                    return
+        await ctx.send(file=discord.File(open('temp/{0}.png'.format(file_id), 'rb'), '{0}.png'.format(file_id)))
 
