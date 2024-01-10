@@ -9,36 +9,25 @@ X = []
 Y = []
 
 
-def basic_line(file, file_id):
+def two_var_line(file, file_id):
     """
     Renders a basic line graph
     :param file: path to file
     :param file_id: id of file
     :return: saves image to temp/{file_id}.png
     """
-    lines_num = 2
-    var = {}
-    for i in range(1, lines_num+1):
-        var[i] = ([], [])
-
     with open(file, 'r') as csvfile:
-        plots = csv.reader(csvfile, delimiter=',')
-        # Skip first line (values)
-        lines_num = len(next(plots)) - 1
-        next(plots)
-        for row in plots:
-            for j in range(1, len(row)):
-                var[j][0].append(int(row[0]))
-                var[j][1].append(int(row[j]))
-
-    for k in range(lines_num):
-        plt.plot(var[k+1][0], var[k+1][1])
-
-    plt.xlabel('X')
-    plt.ylabel('y')
+        data = list(csv.reader(csvfile))
+        row_len = len(data)
+        x = [data[i][0] for i in range(1, row_len)]
+        y = [data[i][1] for i in range(1, row_len)]
+        plt.plot(x, y)
+    plt.xlabel(data[0][0])
+    plt.ylabel(data[0][1])
     plt.legend()
-    # plt.show()
+    plt.title("{0} vs. {1}".format(data[0][0], data[0][1]))
     plt.savefig('temp/{}.png'.format(file_id))
+    plt.clf()
 
 
 def basic_bar(file, file_id):

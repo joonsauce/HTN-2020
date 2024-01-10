@@ -72,7 +72,7 @@ async def initial_analysis(ctx, file_path, file_id):
                                "X vs Y *bar* (3)")
                 x = await check_graph_type(ctx, 3)
                 if x == 1:
-                    basic_line(file_path, file_id)
+                    two_var_line(file_path, file_id)
                 elif x == 2:
                     basic_scatter(file_path, file_id)
                 elif x == 3:
