@@ -9,6 +9,15 @@ def set_plot_info(x_label, y_label, title, file_id):
     plt.clf()
 
 
+def get_two_var_data(file):
+    with open(file, 'r') as csvfile:
+        data = list(csv.reader(csvfile))
+        row_len = len(data)
+        x = [data[i][0] for i in range(1, row_len)]
+        y = [data[i][1] for i in range(1, row_len)]
+    return [x, y]
+
+
 def two_var_line(file, file_id):
     """
     Renders a basic line graph
@@ -16,12 +25,8 @@ def two_var_line(file, file_id):
     :param file_id: id of file
     :return: saves image to temp/{file_id}.png
     """
-    with open(file, 'r') as csvfile:
-        data = list(csv.reader(csvfile))
-        row_len = len(data)
-        x = [data[i][0] for i in range(1, row_len)]
-        y = [data[i][1] for i in range(1, row_len)]
-        plt.plot(x, y)
+    data = get_two_var_data(file)
+    plt.plot(data[0], data[1])
     set_plot_info(data[0][0], data[0][1], "{0} vs. {1}".format(data[0][0], data[0][1]), file_id)
 
 
@@ -31,12 +36,8 @@ def two_var_bar(file, file_id):
     :param file: path to file
     :return: saves image to temp/{file_id}.png
     """
-    with open(file, 'r') as csvfile:
-        data = list(csv.reader(csvfile))
-        row_len = len(data)
-        x = [data[i][0] for i in range(1, row_len)]
-        y = [data[i][1] for i in range(1, row_len)]
-    plt.bar(x, y)
+    data = get_two_var_data(file)
+    plt.bar(data[0], data[1])
     set_plot_info(data[0][0], data[0][1], "{0} vs. {1}".format(data[0][0], data[0][1]), file_id)
 
 
@@ -46,12 +47,8 @@ def two_var_scatter(file, file_id):
     :param file: path to file
     :return: saves image to temp/{file_id}.png
     """
-    with open(file, 'r') as csvfile:
-        data = list(csv.reader(csvfile))
-        row_len = len(data)
-        x = [data[i][0] for i in range(1, row_len)]
-        y = [data[i][1] for i in range(1, row_len)]
-    plt.scatter(x, y)
+    data = get_two_var_data(file)
+    plt.scatter(data[0], data[1])
     set_plot_info(data[0][0], data[0][1], "{0} vs. {1}".format(data[0][0], data[0][1]), file_id)
 
 
