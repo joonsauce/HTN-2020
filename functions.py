@@ -76,7 +76,7 @@ async def initial_analysis(ctx, file_path, file_id):
                 elif x == 2:
                     basic_scatter(file_path, file_id)
                 elif x == 3:
-                    basic_bar(file_path, file_id)
+                    two_var_bar(file_path, file_id)
                 else:
                     return
         file = open('temp/{0}.png'.format(file_id), 'rb')

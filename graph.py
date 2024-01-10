@@ -24,32 +24,28 @@ def two_var_line(file, file_id):
         plt.plot(x, y)
     plt.xlabel(data[0][0])
     plt.ylabel(data[0][1])
-    plt.legend()
     plt.title("{0} vs. {1}".format(data[0][0], data[0][1]))
     plt.savefig('temp/{}.png'.format(file_id))
     plt.clf()
 
 
-def basic_bar(file, file_id):
+def two_var_bar(file, file_id):
     """
     Renders a basic bar graph
     :param file: path to file
     :return: saves image to temp/{file_id}.png
     """
     with open(file, 'r') as csvfile:
-        plotting = csv.reader(csvfile, delimiter=',')
-        next(plotting)
-        for row in plotting:
-            variables['x'].append(int(row[0]))
-            variables['y'].append(int(row[1]))
-
-    plt.bar(variables['x'], variables['y'], label='Bars1')
-
-    plt.xlabel('X')
-    plt.ylabel('y')
-    plt.legend()
-    # plt.show()
+        data = list(csv.reader(csvfile))
+        row_len = len(data)
+        x = [data[i][0] for i in range(1, row_len)]
+        y = [data[i][1] for i in range(1, row_len)]
+    plt.bar(x, y)
+    plt.xlabel(data[0][0])
+    plt.ylabel(data[0][1])
+    plt.title("{0} vs. {1}".format(data[0][0], data[0][1]))
     plt.savefig('temp/{}.png'.format(file_id))
+    plt.clf()
 
 
 def basic_scatter(file, file_id):
@@ -71,6 +67,7 @@ def basic_scatter(file, file_id):
     plt.legend()
     # plt.show()
     plt.savefig('temp/{}.png'.format(file_id))
+    plt.clf()
 
 
 def basic_pie(file, file_id):
