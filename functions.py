@@ -79,5 +79,7 @@ async def initial_analysis(ctx, file_path, file_id):
                     basic_bar(file_path, file_id)
                 else:
                     return
-        await ctx.send(file=discord.File(open('temp/{0}.png'.format(file_id), 'rb'), '{0}.png'.format(file_id)))
+        file = open('temp/{0}.png'.format(file_id), 'rb')
+        await ctx.send(file=discord.File(file, '{0}.png'.format(file_id)))
+        file.close()
 
