@@ -1,5 +1,5 @@
 from functions import *
-from settings import *
+from help import *
 
 # graph_file command: given a file, analyzes data and graphs it
 @bot.command()
