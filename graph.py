@@ -1,6 +1,14 @@
 from settings import *
 
 
+def set_plot_info(x_label, y_label, title, file_id):
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.title(title)
+    plt.savefig('temp/{}.png'.format(file_id))
+    plt.clf()
+
+
 def two_var_line(file, file_id):
     """
     Renders a basic line graph
@@ -14,11 +22,7 @@ def two_var_line(file, file_id):
         x = [data[i][0] for i in range(1, row_len)]
         y = [data[i][1] for i in range(1, row_len)]
         plt.plot(x, y)
-    plt.xlabel(data[0][0])
-    plt.ylabel(data[0][1])
-    plt.title("{0} vs. {1}".format(data[0][0], data[0][1]))
-    plt.savefig('temp/{}.png'.format(file_id))
-    plt.clf()
+    set_plot_info(data[0][0], data[0][1], "{0} vs. {1}".format(data[0][0], data[0][1]), file_id)
 
 
 def two_var_bar(file, file_id):
@@ -33,11 +37,7 @@ def two_var_bar(file, file_id):
         x = [data[i][0] for i in range(1, row_len)]
         y = [data[i][1] for i in range(1, row_len)]
     plt.bar(x, y)
-    plt.xlabel(data[0][0])
-    plt.ylabel(data[0][1])
-    plt.title("{0} vs. {1}".format(data[0][0], data[0][1]))
-    plt.savefig('temp/{}.png'.format(file_id))
-    plt.clf()
+    set_plot_info(data[0][0], data[0][1], "{0} vs. {1}".format(data[0][0], data[0][1]), file_id)
 
 
 def two_var_scatter(file, file_id):
@@ -52,11 +52,7 @@ def two_var_scatter(file, file_id):
         x = [data[i][0] for i in range(1, row_len)]
         y = [data[i][1] for i in range(1, row_len)]
     plt.scatter(x, y)
-    plt.xlabel(data[0][0])
-    plt.ylabel(data[0][1])
-    plt.title("{0} vs. {1}".format(data[0][0], data[0][1]))
-    plt.savefig('temp/{}.png'.format(file_id))
-    plt.clf()
+    set_plot_info(data[0][0], data[0][1], "{0} vs. {1}".format(data[0][0], data[0][1]), file_id)
 
 
 def basic_pie(file, file_id):
