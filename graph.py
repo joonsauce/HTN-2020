@@ -59,17 +59,12 @@ def basic_pie(file, file_id):
     :param file_id: id of file
     :return: saves image to temp/{file_id}.png
     """
-    names = []
-    values = []
     with open(file, 'r') as csvfile:
-        plotting = csv.reader(csvfile, delimiter=',')
-        next(plotting)
-        for row in plotting:
-            names.append(row[0])
-            values.append(row[1])
-    colors = ['m', 'b', 'k', 'c', 'r']
-
-    plt.pie(values, labels=names, colors=colors, startangle=90)
-    plt.title('Pie Chart')
+        data = list(csv.reader(csvfile))
+        names = data[0]
+        values = data[1]
+    plt.pie(values, labels=names)
+    plt.title('DisGraph Pie Chart')
     plt.savefig('temp/{}.png'.format(file_id))
+    plt.clf()
 
