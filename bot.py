@@ -17,8 +17,11 @@ async def graph_file(ctx):
                 else:
                     await msg.attachments[0].save(file_path)
                 await initial_analysis(ctx, file_path, file_id)
-                os.remove(file_path)
-                os.remove('temp/{0}.png'.format(file_id))
+                try:
+                    os.remove(file_path)
+                    os.remove('temp/{0}.png'.format(file_id))
+                except:
+                    print('Manual deletion required')
             else:
                 await ctx.send("Invalid file type. Please attach a file with `{0}` extensions and try again.".format(','.join(supported_file_types)))
         else:
