@@ -82,15 +82,15 @@ async def initial_analysis(ctx, file_path, file_id):
             elif col_len == 3:
                 await ctx.send("Please choose a graph type: X vs Y1 vs Y2 *line* (1), X vs Y vs Y2 *scatter* (2), "
                                "X vs Y1 vs Y2 *bar* (3)")
-                x = await check_graph_type(ctx, 1)
+                x = await check_graph_type(ctx, 2)
                 if x == 1:
                     three_var_line(file_path, file_id)
-                # elif x == 2:
-                #     two_var_scatter(file_path, file_id)
+                elif x == 2:
+                    three_var_scatter(file_path, file_id)
                 # elif x == 3:
                 #     two_var_bar(file_path, file_id)
-                # else:
-                #     return
+                else:
+                    return
         file = open('temp/{0}.png'.format(file_id), 'rb')
         await ctx.send(file=discord.File(file, '{0}.png'.format(file_id)))
         file.close()
