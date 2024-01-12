@@ -48,12 +48,10 @@ def two_var_line(file, file_id):
 
 def three_var_line(file, file_id):
     data = get_three_var_data(file)
-    fig, ax1 = plt.subplots()
-    ax1.set_xlabel(data[0][0])
-    ax1.set_ylabel(data[1][0])
-    ax2 = ax1.twinx()
-    ax2.set_ylabel(data[2][0])
     plt.plot(data[0][1:], data[1][1:], data[2][1:])
+    plt.xlabel(data[0][0])
+    plt.ylabel(data[1][0])
+    plt.twinx().set_ylabel(data[2][0])
     three_var_set_plot_info(f"{data[0][0]} vs. {data[1][0]} vs. {data[2][0]}", file_id)
 
 
