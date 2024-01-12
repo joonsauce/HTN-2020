@@ -19,8 +19,8 @@ def get_two_var_data(file):
     with open(file, 'r') as csvfile:
         data = list(csv.reader(csvfile))
         row_len = len(data)
-        x = [data[0][0]] + [data[i][0] for i in range(1, row_len)]
-        y = [data[0][1]] + [data[i][1] for i in range(1, row_len)]
+        x = [data[0][0]] + [float(data[i][0]) for i in range(1, row_len)]
+        y = [data[0][1]] + [float(data[i][1]) for i in range(1, row_len)]
     return [x, y]
 
 
