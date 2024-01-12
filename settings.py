@@ -7,6 +7,7 @@ import os
 import pandas
 import requests
 import uuid
+from functools import reduce
 from discord.ext import commands
 
 prefix = "d!"

@@ -42,7 +42,12 @@ async def check_graph_type(ctx, max_val):
 
 
 def verify_data(data: list, row_len: int, col_len: int) -> bool:
-    return all([len(data[i]) == col_len for i in range(row_len)])
+    if all([len(data[i]) == col_len for i in range(row_len)]):
+        x = [[data[i][j] for j in range(col_len)] for i in range(1, row_len)]
+        x = reduce(lambda a, b: a + b, x)
+        x = [i.isnumeric() for i in x]
+        return all(x)
+    return False
 
 
 async def initial_analysis(ctx, file_path, file_id):
