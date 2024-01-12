@@ -2,6 +2,14 @@ from settings import *
 
 
 def two_var_set_plot_info(x_label, y_label, title, file_id):
+    """
+        Sets information of two variable graphs
+        :param x_label: x-axis label
+        :param y_label: y-axis label
+        :param title: title of graph
+        :param file_id: file id
+        :return: saves image to temp/{file_id}.png
+    """
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.title(title)
@@ -10,12 +18,23 @@ def two_var_set_plot_info(x_label, y_label, title, file_id):
 
 
 def three_var_set_plot_info(title, file_id):
+    """
+        Sets information of three variable graphs
+        :param title: title of graph
+        :param file_id: file id
+        :return: saves image to temp/{file_id}.png
+    """
     plt.title(title)
     plt.savefig('temp/{}.png'.format(file_id))
     plt.clf()
 
 
 def get_two_var_data(file):
+    """
+        Returns information from two variable data
+        :param file: path to file
+        :return: data as a list
+    """
     with open(file, 'r') as csvfile:
         data = list(csv.reader(csvfile))
         row_len = len(data)
@@ -25,6 +44,11 @@ def get_two_var_data(file):
 
 
 def get_three_var_data(file):
+    """
+        Returns information from three variable data
+        :param file: path to file
+        :return: data as list
+    """
     with open(file, 'r') as csvfile:
         data = list(csv.reader(csvfile))
         row_len = len(data)
@@ -47,6 +71,12 @@ def two_var_line(file, file_id):
 
 
 def three_var_line(file, file_id):
+    """
+        Renders a three-variable line graph
+        :param file: path to file
+        :param file_id: id of file
+        :return: saves image to temp/{file_id}.png
+    """
     data = get_three_var_data(file)
     plt.plot(data[0][1:], data[1][1:], data[2][1:])
     plt.xlabel(data[0][0])
@@ -78,6 +108,12 @@ def two_var_scatter(file, file_id):
 
 
 def three_var_scatter(file, file_id):
+    """
+        Renders a three-variable scatter graph
+        :param file: path to file
+        :param file_id: id of file
+        :return: saves image to temp/{file_id}.png
+    """
     data = get_three_var_data(file)
     print(data)
     fig, ax1 = plt.subplots()

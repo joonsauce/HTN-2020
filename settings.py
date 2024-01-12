@@ -25,11 +25,15 @@ allowed_mentions = discord.AllowedMentions(everyone=False,
 bot = commands.Bot(command_prefix=prefix, intents=intents, description=description, case_insensitive=True,
                    allowed_mentions=allowed_mentions)
 
+# remove help command to add custom help command
 bot.remove_command('help')
 
+# gets bot token from text file
 with open('bot_token.txt', 'r') as token:
     bot_token = token.readline()
 
+
+# check that bot is ready to work
 @bot.event
 async def on_ready():
     print("Status: OK")

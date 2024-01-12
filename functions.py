@@ -3,6 +3,11 @@ from settings import *
 
 
 def convert_to_csv(file):
+    """
+        Converts .xls and .xlsx files to .csv files
+        :param file: path to file
+        :return: saves image to temp/{file_id}.png
+    """
     if file.filename.endswith('.xlsx'):
         file.attachments[0].save('temp/file.xlsx')
         file = pandas.read_excel('temp/file.xlsx')
@@ -14,6 +19,11 @@ def convert_to_csv(file):
 
 
 async def wait_for_message(ctx):
+    """
+        Asynchronously waits for message then returns message if message sent
+        :param ctx: bot context
+        :return: message if message sent, else None
+    """
     try:
         msg = await bot.wait_for('message', timeout=60)
     except asyncio.TimeoutError:
@@ -24,6 +34,12 @@ async def wait_for_message(ctx):
 
 
 async def check_graph_type(ctx, max_val):
+    """
+        Waits for user input then returns information
+        :param ctx: bot context
+        :param max_val: max acceptable value
+        :return: an integer that corresponds to expected graph type
+    """
     msg = await wait_for_message(ctx)
     if msg:
         msg = msg.content
@@ -42,6 +58,13 @@ async def check_graph_type(ctx, max_val):
 
 
 def verify_data(data: list, row_len: int, col_len: int) -> bool:
+    """
+        Verifies that the contents of the .csv file are all numeric
+        :param data: user inputted data
+        :param row_len: numer of rows
+        :param col_len: numer of columns
+        :return: boolean of whether data is valid or not
+    """
     if all([len(data[i]) == col_len for i in range(row_len)]):
         x = [[data[i][j] for j in range(col_len)] for i in range(1, row_len)]
         x = reduce(lambda a, b: a + b, x)
@@ -51,10 +74,14 @@ def verify_data(data: list, row_len: int, col_len: int) -> bool:
 
 
 async def initial_analysis(ctx, file_path, file_id):
+    """
+        Analyzes data and sends image back to user
+        :param ctx: bot context
+        :param file_path: path to data file
+        :param file_id: file id
+        :return: saves image to temp/{file_id}.png
+    """
     with open(file_path, 'r') as data:
-        # check number of rows and columns
-        # throw problems if number of rows/columns is too large (greater than 3)
-        # return number of rows/columns and save direction
         data = list(csv.reader(data))
         row_len = len(data)
         if row_len <= 1:
