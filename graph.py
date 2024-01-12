@@ -19,8 +19,8 @@ def get_two_var_data(file):
     with open(file, 'r') as csvfile:
         data = list(csv.reader(csvfile))
         row_len = len(data)
-        x = [data[i][0] for i in range(row_len)]
-        y = [data[i][1] for i in range(row_len)]
+        x = [data[0][0]] + [data[i][0] for i in range(1, row_len)]
+        y = [data[0][1]] + [data[i][1] for i in range(1, row_len)]
     return [x, y]
 
 
@@ -28,9 +28,9 @@ def get_three_var_data(file):
     with open(file, 'r') as csvfile:
         data = list(csv.reader(csvfile))
         row_len = len(data)
-        x = [data[i][0] for i in range(row_len)]
-        y1 = [data[i][1] for i in range(row_len)]
-        y2 = [data[i][2] for i in range(row_len)]
+        x = [data[0][0]] + [float(data[i][0]) for i in range(1, row_len)]
+        y1 = [data[0][1]] + [float(data[i][1]) for i in range(1, row_len)]
+        y2 = [data[0][2]] + [float(data[i][2]) for i in range(1, row_len)]
     return [x, y1, y2]
 
 
@@ -75,6 +75,19 @@ def two_var_scatter(file, file_id):
     data = get_two_var_data(file)
     plt.scatter(data[0][1:], data[1][1:])
     two_var_set_plot_info(data[0][0], data[1][0], "{0} vs. {1}".format(data[0][0], data[1][0]), file_id)
+
+
+def three_var_scatter(file, file_id):
+    data = get_three_var_data(file)
+    print(data)
+    fig, ax1 = plt.subplots()
+    ax1.scatter(data[0][1:], data[1][1:], color='b')
+    ax2 = ax1.twinx()
+    ax2.scatter(data[0][1:], data[2][1:], color='r')
+    ax1.set_xlabel(data[0][0])
+    ax1.set_ylabel(data[1][0])
+    ax2.set_ylabel(data[2][0])
+    three_var_set_plot_info(f"{data[0][0]} vs. {data[1][0]} vs. {data[2][0]}", file_id)
 
 
 def basic_pie(file, file_id):
