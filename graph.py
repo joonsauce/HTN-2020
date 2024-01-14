@@ -89,6 +89,7 @@ def two_var_bar(file, file_id):
     """
     Renders a two-variable bar graph
     :param file: path to file
+    :param file_id: file id
     :return: saves image to temp/{file_id}.png
     """
     data = get_two_var_data(file)
@@ -100,6 +101,7 @@ def two_var_scatter(file, file_id):
     """
     Renders a two-variable scatter graph
     :param file: path to file
+    :param file_id: file id
     :return: saves image to temp/{file_id}.png
     """
     data = get_two_var_data(file)
