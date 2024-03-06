@@ -35,7 +35,9 @@ if you'd like to host the bot yourself you can.
 
 ## Requirements
 
-- Python 3.8 or greater
+- Python 3.10 or greater
+- Libraries from requirements.txt satisfied
+  - Follow steps in [Installation](#installation) to install required dependencies
 
 ## Installation
 
